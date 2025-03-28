@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const productRoutes = require('./routes/productRoutes');
-const sequelize = require('./models'); // Thêm dòng này
+const sequelize = require('./models');
 
 const app = express();
 
