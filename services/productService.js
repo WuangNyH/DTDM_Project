@@ -19,6 +19,20 @@ class ProductService {
     static async addProduct(productData) {
         return await Product.create(productData);
     }
+
+    static async deleteProduct(productId) {
+        const deleted = await Product.destroy({
+            where: {
+                id: productId
+            }
+        });
+
+        if (deleted === 0) {
+            throw new Error('Product not found');
+        }
+
+        return { message: 'Product deleted successfully' };
+    }
 }
 
 module.exports = ProductService;

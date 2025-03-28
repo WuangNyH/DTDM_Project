@@ -35,6 +35,23 @@ class ProductController {
             res.status(500).json({ error: error.message });
         }
     }
+
+    static async deleteProduct(req, res) {
+        try {
+            const { id } = req.params;
+            if (!id) {
+                return res.status(400).json({ error: 'Product ID is required' });
+            }
+
+            const result = await ProductService.deleteProduct(id);
+            res.json(result);
+        } catch (error) {
+            if (error.message === 'Product not found') {
+                return res.status(404).json({ error: error.message });
+            }
+            res.status(500).json({ error: error.message });
+        }
+    }
 }
 
 module.exports = ProductController;

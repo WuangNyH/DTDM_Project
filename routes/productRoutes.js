@@ -12,4 +12,7 @@ router.get('/search', ProductController.searchProducts);
 // Add a new product
 router.post('/', ProductController.addProduct);
 
+// Delete a product
+router.delete('/:id', ProductController.deleteProduct);
+
 module.exports = router;
