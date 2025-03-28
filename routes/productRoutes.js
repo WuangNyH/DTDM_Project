@@ -15,4 +15,7 @@ router.post('/', ProductController.addProduct);
 // Delete a product
 router.delete('/:id', ProductController.deleteProduct);
 
+// Get product by id
+router.get('/:id', ProductController.getProductById);
+
 module.exports = router;

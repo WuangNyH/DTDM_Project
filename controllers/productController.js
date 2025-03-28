@@ -12,11 +12,11 @@ class ProductController {
 
     static async searchProducts(req, res) {
         try {
-            const { q } = req.query;
-            if (!q) {
+            const { keyword } = req.query;
+            if (!keyword) {
                 return res.status(400).json({ error: 'Search term is required' });
             }
-            const products = await ProductService.searchProducts(q);
+            const products = await ProductService.searchProducts(keyword);
             res.json(products);
         } catch (error) {
             res.status(500).json({ error: error.message });
@@ -45,6 +45,23 @@ class ProductController {
 
             const result = await ProductService.deleteProduct(id);
             res.json(result);
+        } catch (error) {
+            if (error.message === 'Product not found') {
+                return res.status(404).json({ error: error.message });
+            }
+            res.status(500).json({ error: error.message });
+        }
+    }
+
+    static async getProductById(req, res) {
+        try {
+            const { id } = req.params;
+            if (!id) {
+                return res.status(400).json({ error: 'Product ID is required' });
+            }
+
+            const product = await ProductService.getProductById(id);
+            res.json(product);
         } catch (error) {
             if (error.message === 'Product not found') {
                 return res.status(404).json({ error: error.message });

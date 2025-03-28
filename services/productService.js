@@ -33,6 +33,16 @@ class ProductService {
 
         return { message: 'Product deleted successfully' };
     }
+
+    static async getProductById(productId) {
+        const product = await Product.findByPk(productId);
+
+        if (!product) {
+            throw new Error('Product not found');
+        }
+
+        return product;
+    }
 }
 
 module.exports = ProductService;
